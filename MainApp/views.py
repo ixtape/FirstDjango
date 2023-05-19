@@ -17,9 +17,12 @@ items = [
 ]
 
 def home( request):
-    text = """ <h1>"Изучаем django"</h1>
-               <strong>Автор</strong>: <i>Табаков А.П.</i> """
-    return HttpResponse(text)
+    context = {
+        "name" : '............',
+        "email": '............'
+    }
+    return render(request, "index.html")
+
 
 def about(request):
     result = f"""
@@ -54,8 +57,16 @@ def get_item(request, id):
 #    <li> ... </li>
 # </ol>
 def items_list(request):
-    result = "<h2>Список товаров</h2><ol>"
-    for item in items:
-        result += f"<li>{item['name']}</li>"
-    result += '</ol>'
-    return HttpResponse(result)
+    """ Функция для отображения"""
+   # result = "<h2>Список товаров</h2><ol>"
+   #  for item in items:
+   #     result += f"<li>{item['name']}</li>"
+   #  result += '</ol>'
+   #  return HttpResponse(result)
+    context = {
+        'items': items
+
+    }
+    # Аргументы render :  Запрос(request), Имя файла шаблона, Контекст (чем заполняем)
+    return render(request, 'items-list.html', context)
+
