@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
 from MainApp.models import Item
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def home(request):
@@ -14,7 +15,7 @@ def about(request):
         "midle": "Павлович",
         "surname": "Табаков",
         "phone": "8-923-600-01-02",
-        "email": "vasya@mail.ru",
+        "email": "two.92@mail.ru",
     }
     result = f"""
         Имя: <b>{author['name']}</b><br>
@@ -31,9 +32,13 @@ def about(request):
 # url /item/1
 # url /item/2
 def get_item(request, id):
+    try:
+        item = Item.objects.get(id=id)
+
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound(f"Item with id={id} not found")
     context = {"item": item}
     return render(request, "item-page.html", context)
-    return HttpResponseNotFound(f"Item with id={id} not found")
 
 
 def items_list(request):
