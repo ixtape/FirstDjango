@@ -62,11 +62,7 @@ def get_item(request, id):
 # </ol>
 def items_list(request):
     """Функция для отображения"""
-    # result = "<h2>Список товаров</h2><ol>"
-    #  for item in items:
-    #     result += f"<li>{item['name']}</li>"
-    #  result += '</ol>'
-    #  return HttpResponse(result)
+    items = Item.objects.all()
     context = {"items": items}
     # Аргументы render :  Запрос(request), Имя файла шаблона, Контекст (чем заполняем)
     return render(request, "items-list.html", context)
