@@ -7,3 +7,13 @@ python manage.py migrate
 python manage.py runserver
 Запуск терминала в контексте django
 python manage.py shell_plus --ipython
+
+
+
+
+## Запуск терминала django
+'python3 manage.py shell_plus -- ipython'
+
+
+
+
